@@ -19,14 +19,17 @@ def get_ingredients_from_image():
 	if request.method == 'POST':
 		# if the request method is post, then we get the form image and unwanted ingredients
 		path_to_image = request.form['image']
-		ingredients = pytesseract.image_to_string(Image.open(path_to_image))
-		unwanted_ingredients = set(request.form['unwanted_ingredients'])
+		ingredients = processList(pytesseract.image_to_string(Image.open(path_to_image)))
+		unwanted_ingredients = set(processList(request.form['unwanted_ingredients']))
 		results = []
 		for u in unwanted_ingredients:
 			if u in ingredients:
 				results.append(u)
 		return render_template('results.html', ingredients=results)
 	return render_template('index.html')
+
+def processList(s):
+	return 
 
 if __name__ == "__main__":
     app.run(debug=True)
