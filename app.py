@@ -27,7 +27,7 @@ def get_ingredients_from_image(path_to_image):
 	for u in unwanted_ingredients:
 		if u in ingredients:
 			results.append(u)
-	return render_template('', ingredients=results)
+	return render_template('results.html', ingredients=results)
 
 
 
