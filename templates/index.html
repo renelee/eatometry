@@ -3,10 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Sightengine demo - Python and Flask</title>
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/app.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+  <style>
+    h1 {
+      color: #3D9970;
+      font-family: 'Lora', serif;
+      font-size: 150px;
+      font-weight: bold;
+      letter-spacing: -1px;
+      line-height: 1;
+      text-align: center;
+    }
+    h2 {
+      font-family: 'Lora', serif;
+      color: #000000;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 32px;
+      margin: 0 0 72px;
+      text-align: center;
+    }
+    span {
+      font-family: 'Lora', serif;
+    }
+  </style>
 </head>
 
 <body>
+
+<h1> EATOMETRY </h1>
+<h2> Select your dietary restrictions and ingredients you would like to avoid. <h2>
 <header class="navbar">
   <form action="/upload" method="post" enctype="multipart/form-data" >
       <span class="btn btn-default btn-file">
