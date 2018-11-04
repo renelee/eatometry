@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>upload status</p>
+{% if success %}
+<p> upload success! </p>
+{% else %}
+<p> couldn't upload file </p>
+{% endif %}
+{% endblock %}

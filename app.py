@@ -1,19 +1,21 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask import send_from_directory
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class, UploadNotAllowed
 # from PIL import Image
 import pytesseract
 
-UPLOAD_FOLDER = '/uploads/'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/static/img'
+
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
 
 @app.route('/')
 def home():
 	return render_template('index.html')
 
+'''
 @app.route('/upload', methods=['POST'])
 def get_ingredients_from_image():
 	if request.method == 'POST':
@@ -29,7 +31,17 @@ def get_ingredients_from_image():
 	return render_template('index.html')
 
 def processList(s):
-	return 
+	return ...
+	'''
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+	try: 
+		if request.method == 'POST' and 'photo' in request.files:
+			filename = photos.save(request.files['photo'])
+			return render_template('upload.html', success=True)
+	except UploadNotAllowed:
+		return render_template('upload.html', success=False)
 
 if __name__ == "__main__":
     app.run(debug=True)
